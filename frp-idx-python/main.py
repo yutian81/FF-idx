@@ -21,12 +21,12 @@ AUTO_ACCESS = os.environ.get('AUTO_ACCESS', 'false').lower() == 'true'  # False 
 FILE_PATH = Path(os.environ.get('FILE_PATH', './.cache'))# Path to sub.txt subscription file
 SUB_PATH = os.environ.get('SUB_PATH', 'sub')             # Subscription path, default is 'sub'
 UUID = os.environ.get('UUID', 'afb07c1f-52fb-46d4-aec5-8f91fe89b27a')  # UUID for cross-platform v1 nezha
-NEZHA_SERVER = os.environ.get('NEZHA_SERVER', 'sos.de5.net:8008')        # Nezha panel address, v1 format: nz.serv00.net:8008, v0 format: nz.serv00.net
+NEZHA_SERVER = os.environ.get('NEZHA_SERVER', '')        # Nezha panel address, v1 format: nz.serv00.net:8008, v0 format: nz.serv00.net
 NEZHA_PORT = os.environ.get('NEZHA_PORT', '')            # Leave empty for v1 nezha, v0 agent port
-NEZHA_KEY = os.environ.get('NEZHA_KEY', '811118abcd')              # v1 NZ_CLIENT_SECRET or v0 agent key
-ARGO_DOMAIN = os.environ.get('ARGO_DOMAIN', 'idx-sg.yyy.us.kg')          # Argo fixed tunnel domain, leave empty for temporary tunnel
-ARGO_AUTH = os.environ.get('ARGO_AUTH', 'eyJhIjoiOTg1ZDYwN2YyYWU5NjlkNmVjMjZlZTlhMTY4M2Q1OGYiLCJ0IjoiYzdlMGQ0ODctYjJlZC00NzVkLWE2ZmItZjFiYzRlY2Q3MDE1IiwicyI6IlpqYzJORGhsTWpRdFlXVmpaaTAwWWpNekxUaGxNemN0WTJFd1l6ZGlOMlptTkdaaSJ9')              # Argo fixed tunnel token or json, leave empty for temporary tunnel
-ARGO_PORT = int(os.environ.get('ARGO_PORT', '8002'))     # Argo fixed tunnel port
+NEZHA_KEY = os.environ.get('NEZHA_KEY', '')              # v1 NZ_CLIENT_SECRET or v0 agent key
+ARGO_DOMAIN = os.environ.get('ARGO_DOMAIN', '')          # Argo fixed tunnel domain, leave empty for temporary tunnel
+ARGO_AUTH = os.environ.get('ARGO_AUTH', '')              # Argo fixed tunnel token or json, leave empty for temporary tunnel
+ARGO_PORT = int(os.environ.get('ARGO_PORT', '8001'))     # Argo fixed tunnel port
 TUIC_PORT = int(os.environ.get('TUIC_PORT', '60010'))         # Tuic5 port
 HY2_PORT = int(os.environ.get('HY2_PORT', '60011'))           # Hysteria2 port
 REALITY_PORT = int(os.environ.get('REALITY_PORT', '60012'))   # Reality port
@@ -37,9 +37,9 @@ NAME = os.environ.get('NAME', 'IDX')                     # Node name
 CHAT_ID = os.environ.get('CHAT_ID', '')                  # Telegram chat_id
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '')              # Telegram bot_token
 
-FRP_IP = os.environ.get('FRP_IP', '107.173.127.173')                    # frp 服务端共公网ip
+FRP_IP = os.environ.get('FRP_IP', '')                    # frp 服务端共公网ip
 FRP_PORT = int(os.environ.get('FRP_PORT', '7000'))       # 和frp服务端之间的通信端口，通常为7000
-FRP_TOKEN = os.environ.get('FRP_TOKEN', '811118abcd')              # frp服务端和客户端之间的验证token
+FRP_TOKEN = os.environ.get('FRP_TOKEN', '')              # frp服务端和客户端之间的验证token
 
 # Global variables
 private_key = ''
@@ -855,4 +855,5 @@ if __name__ == "__main__":
     server_thread.daemon = True
     server_thread.start()
  
+
     run_async()
