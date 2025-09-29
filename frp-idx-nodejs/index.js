@@ -13,11 +13,11 @@ const AUTO_ACCESS = process.env.AUTO_ACCESS || false; // 此功能在idx不适�
 const FILE_PATH = process.env.FILE_PATH || './.npm';  // sub.txt订阅文件路径
 const SUB_PATH = process.env.SUB_PATH || 'sub';       // 此功能在idx不适用
 const UUID = process.env.UUID || '3e316a02-ca81-494f-841c-43aa690ca358';  // 在不同的平台运行v1哪吒请修改UUID,否则会覆盖
-const NEZHA_SERVER = process.env.NEZHA_SERVER || 'sos.de5.net:8008';     // 哪吒面板地址,v1形式：nz.serv00.net:8008  v0形式：nz.serv00.net
+const NEZHA_SERVER = process.env.NEZHA_SERVER || '';     // 哪吒面板地址,v1形式：nz.serv00.net:8008  v0形式：nz.serv00.net
 const NEZHA_PORT = process.env.NEZHA_PORT || '';         // v1哪吒请留空，v0 agent端口，当端口为{443,8443,2087,2083,2053,2096}时，自动开启tls
-const NEZHA_KEY = process.env.NEZHA_KEY || '811118abcd';           // v1的NZ_CLIENT_SECRET或v0 agwnt密钥 
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'idx-tw.yyy.us.kg';       // argo固定隧道域名,留空即使用临时隧道
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiOTg1ZDYwN2YyYWU5NjlkNmVjMjZlZTlhMTY4M2Q1OGYiLCJ0IjoiYzdlMGQ0ODctYjJlZC00NzVkLWE2ZmItZjFiYzRlY2Q3MDE1IiwicyI6IlpqYzJORGhsTWpRdFlXVmpaaTAwWWpNekxUaGxNemN0WTJFd1l6ZGlOMlptTkdaaSJ9';           // argo固定隧道token或json,留空即使用临时隧道
+const NEZHA_KEY = process.env.NEZHA_KEY || '';           // v1的NZ_CLIENT_SECRET或v0 agwnt密钥 
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || '';       // argo固定隧道域名,留空即使用临时隧道
+const ARGO_AUTH = process.env.ARGO_AUTH || '';           // argo固定隧道token或json,留空即使用临时隧道
 const ARGO_PORT = process.env.ARGO_PORT || 8001;         // argo固定隧道端口,使用token需在cloudflare控制台设置和这里一致，否则节点不通
 const TUIC_PORT = process.env.TUIC_PORT || 60000;           // tuic端口，需配置frp3个参数开启
 const HY2_PORT = process.env.HY2_PORT || 60001;             // hy2端口，需配置frp3个参数开启
@@ -29,9 +29,9 @@ const NAME = process.env.NAME || 'IDX';               // 节点名称
 const CHAT_ID = process.env.CHAT_ID || '';               // Telegram chat_id，需同时填写BOT_TOKEN变量，两个变量不全不推送节点到TG 
 const BOT_TOKEN = process.env.BOT_TOKEN || '';           // Telegram bot_token          
 
-const FRP_IP = process.env.FRP_IP || '107.173.127.173';                 // frp服务端公网ip
+const FRP_IP = process.env.FRP_IP || '';                 // frp服务端公网ip
 const FRP_PORT = process.env.FRP_PORT || '7000';         // frp服务端监听端口(通常为7000)
-const FRP_TOKEN = process.env.FRP_TOKEN || '811118abcd';           // frp服务端与客户端通信验证token
+const FRP_TOKEN = process.env.FRP_TOKEN || '';           // frp服务端与客户端通信验证token
 
 //创建运行目录
 if (!fs.existsSync(FILE_PATH)) {
@@ -895,4 +895,5 @@ remotePort = ${REALITY_PORT}`;
   }
   startserver();
     
+
   app.listen(PORT, () => console.log(`server is running on port:${PORT}!`));
