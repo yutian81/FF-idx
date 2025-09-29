@@ -9,7 +9,7 @@
 ```shell
 lscr.io/linuxserver/firefox:1143.0.1build1-1xtradeb1.2404.1-ls35
 lscr.io/linuxserver/firefox:1141.0.2build1-1xtradeb1.2404.1-ls19
-# 以下kasm的镜像更为轻量，但是我部署到容器平台有问题；VPS部署正常
+# 以下kasm的镜像更为轻量，仅需要 CUSTOM_USER 和 PASSWORD 两个变量
 lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
 ```
 
@@ -38,6 +38,10 @@ volumes:
 ### 开放端口
 
 3000
+
+## FF网页刷新插件
+
+Auto Refresh Page
 
 ----
 
