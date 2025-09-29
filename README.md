@@ -8,7 +8,6 @@
 
 ```shell
 lscr.io/linuxserver/firefox:1143.0.1build1-1xtradeb1.2404.1-ls35
-lscr.io/linuxserver/firefox:1142.0.1build1-1xtradeb1.2404.1-ls28
 lscr.io/linuxserver/firefox:1141.0.2build1-1xtradeb1.2404.1-ls19
 # 以下kasm的镜像更为轻量，但是我部署到容器平台有问题；VPS部署正常
 lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
