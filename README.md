@@ -14,6 +14,8 @@ lscr.io/linuxserver/firefox:1141.0.2build1-1xtradeb1.2404.1-ls19
 lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
 ```
 
+也可以去官方仓库找自己需要的版本：https://github.com/linuxserver/docker-firefox
+
 ### 建议变量
 
 ```yml
