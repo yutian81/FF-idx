@@ -1,0 +1,6 @@
+新建空白workspace
+
+上传start.sh  并修改环境变量
+
+在.idx文件夹里的dev.nix文件里第49行下新增 run-start-script = "bash start.sh";   然后随意删除一行注释的行（带#的任意一行）触发重新下载环境，即自动部署   
+
