@@ -1,0 +1,9 @@
+新建node-express 
+
+上传index.js和package.json，并在index.js里修改变量
+
+打开终端 安装依赖  npm install
+
+在.idx文件夹里的dev.nix文件第9行里添加pkgs.openssl_3_3.bin  右下角出现紫色 Rebuild Environment 按钮 点击会自动部署 
+
+每次打开网页都会自动部署
