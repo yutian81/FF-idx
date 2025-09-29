@@ -2,20 +2,22 @@
 
 ## docker版FF部署
 
-最低配置 1C2G，理想配置 1C4G
+### 1C2G配置部署镜像
 
-### 镜像选其中之一
+lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
+
+**环境变量：**
+- CUSTOM_USER=登录用户名
+- PASSWORD=登录密码
+
+### 1C4G配置部署镜像
 
 ```shell
 lscr.io/linuxserver/firefox:1143.0.1build1-1xtradeb1.2404.1-ls35
 lscr.io/linuxserver/firefox:1141.0.2build1-1xtradeb1.2404.1-ls19
-# 以下kasm的镜像更为轻量，仅需要 CUSTOM_USER 和 PASSWORD 两个变量
-lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
 ```
 
-也可以去官方仓库找自己需要的版本：https://github.com/linuxserver/docker-firefox
-
-### 建议变量
+**环境变量：**
 
 ```yml
 PUID=1000
@@ -28,6 +30,8 @@ CUSTOM_USER=登录用户名
 PASSWORD=登录密码
 ```
 
+> 也可以去官方仓库找自己需要的版本：https://github.com/linuxserver/docker-firefox
+
 ### 挂载卷
 
 ```yml
@@ -39,7 +43,7 @@ volumes:
 
 3000
 
-## FF网页刷新插件
+### FF网页刷新插件
 
 Auto Refresh Page
 
