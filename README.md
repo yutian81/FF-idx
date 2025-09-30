@@ -2,15 +2,29 @@
 
 ## docker版FF部署
 
+> 使用固定镜像版本避免自动更新
+
+### 1C1G配置部署镜像
+
+```shell
+ghcr.io/jlesage/firefox:v25.09.1
+```
+> 感谢 [jlesage大佬](https://github.com/jlesage/docker-firefox) 提供的镜像
+
+**环境变量**
+- VNC_PASSWORD=登录密码
+
 ### 1C2G配置部署镜像
 
+```shell
 lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
+```
 
 **环境变量：**
 - CUSTOM_USER=登录用户名
 - PASSWORD=登录密码
 
-### 1C4G配置部署镜像
+### 1C4G配置部署镜像(二选一)
 
 ```shell
 lscr.io/linuxserver/firefox:1143.0.1build1-1xtradeb1.2404.1-ls35
@@ -39,9 +53,16 @@ volumes:
   - /path/to/firefox/config:/config
 ```
 
+容器平台填：`/config`
+
 ### 开放端口
 
 3000
+
+### 配置文件（双保险避免自动更新）
+
+- 文件名：`/usr/lib/firefox/distribution/policies.json`
+- 文件值：`{"policies":{"DisableAppUpdate":true}}`
 
 ### FF网页刷新插件
 
