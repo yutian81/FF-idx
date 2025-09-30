@@ -39,8 +39,6 @@ lscr.io/linuxserver/firefox:1141.0.2build1-1xtradeb1.2404.1-ls19
 PUID=1000
 PGID=1000
 TZ=Etc/UTC
-DOCKER_MODS=linuxserver/mods:universal-package-install
-INSTALL_PACKAGES=fonts-noto-cjk
 LC_ALL=zh_CN.UTF-8
 CUSTOM_USER=登录用户名
 PASSWORD=登录密码
