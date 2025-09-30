@@ -22,8 +22,6 @@ lscr.io/linuxserver/firefox:kasm-140.0.2build1-0ubuntu0.24.04.1mt1-ls3
 ```
 
 **环境变量：**
-- PUID=1000
-- PGID=1000
 - LC_ALL=zh_CN.UTF-8
 - CUSTOM_USER=登录用户名
 - PASSWORD=登录密码
