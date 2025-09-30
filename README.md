@@ -12,6 +12,7 @@ ghcr.io/jlesage/firefox:v25.09.1
 > 感谢 [jlesage大佬](https://github.com/jlesage/docker-firefox) 提供的镜像
 
 **环境变量**
+- LANG=zh_CN.UTF-8
 - VNC_PASSWORD=登录密码
 
 ### 1C2G配置部署镜像
