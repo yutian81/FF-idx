@@ -8,6 +8,7 @@
 
 ```shell
 ghcr.io/jlesage/firefox:v25.09.1
+ghcr.io/eooce/firefox:latest
 ```
 > 感谢 [jlesage大佬](https://github.com/jlesage/docker-firefox) 提供的镜像
 
