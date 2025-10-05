@@ -7,6 +7,7 @@
 ### 1C1G配置部署镜像
 
 ```shell
+# 以下二选一
 ghcr.io/jlesage/firefox:v25.09.1   # 端口 5800
 ghcr.io/eooce/firefox:latest       # 端口 8080
 ```
