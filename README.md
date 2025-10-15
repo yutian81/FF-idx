@@ -33,7 +33,6 @@ services:
       - VNC_PASSWORD=yourpassword
     volumes:
       - ./firefox/data:/data/vncuser
-      - ./firefox/config:/config
 ```
 
 ### 1C2G配置部署镜像
