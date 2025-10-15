@@ -17,7 +17,8 @@ ghcr.io/eooce/firefox:latest       # 端口 8080
 - VNC_PASSWORD=登录密码
 
 **挂载卷**
-- /config，容量 1G
+- J佬镜像：/config，容量 1G
+- 老王镜像：/data/vncuser，容量 1G
 
 **compose示例：**
 
