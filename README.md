@@ -30,9 +30,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - VNC_PASSWORD=yourpassword        # 设置登录密码
+      - VNC_PASSWORD=yourpassword
     volumes:
-      - ./firefox-eooce/config:/config
+      - ./firefox/data:/data/vncuser
 ```
 
 ### 1C2G配置部署镜像
