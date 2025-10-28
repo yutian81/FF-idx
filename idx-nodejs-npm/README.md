@@ -69,7 +69,7 @@ npx npx node-sbx --env-file ./myapp-nodejs/.env
 
 ### 安装 PM2
 ```bash
-npm install -g pm2
+npm install pm2
 ```
 
 ### 运行项目
