@@ -63,10 +63,16 @@ npx npx node-sbx
 npx npx node-sbx --env-file ./myapp-nodejs/.env
 ```
 
+---
+
 ## 保持后台运行且自启动
 
-- 安装 PM2：`npm install -g pm2`
-- 运行项目
+### 安装 PM2
+```bash
+npm install -g pm2
+```
+
+### 运行项目
 ```bash
 # nodejs-argo
 pm2 start node_modules/nodejs-argo/index.js --name nodejs-argo --node-args="-r dotenv/config"
@@ -74,7 +80,7 @@ pm2 start node_modules/nodejs-argo/index.js --name nodejs-argo --node-args="-r d
 pm2 start node_modules/node-sbx/index.js --name node-sbx --node-args="-r dotenv/config"
 ```
 
-- 其他PM命令
+### 其他PM命令
 ```bash
 # 查看进程状态
 pm2 status
@@ -84,4 +90,10 @@ pm2 logs nodejs-argo
 pm2 startup
 # 保存当前的进程列表
 pm2 save
+```
+
+### 更新 .env 后需要重启项目
+```bash
+pm2 restart nodejs-argo
+pm2 restart node-sbx
 ```
