@@ -60,24 +60,25 @@ npx npx node-sbx
 或使用 `.env` 文件加载变量
 
 ```bash
-npx npx node-sbx --env-file ./myapp-nodejs/.env
+# 加载变量并启动
+node -r dotenv/config node_modules/node-sbx/index.js
 ```
 
 ---
 
-## 保持后台运行且自启动
+## 保持后台运行
 
 ### 安装 PM2
 ```bash
 npm install pm2
 ```
 
-### 运行项目
+### 加载 .env 变量文件
 ```bash
 # nodejs-argo
-pm2 start node_modules/nodejs-argo/index.js --name "nodejs-argo" --node-args="-r dotenv/config"
+pm2 start nodejs-argo --name "nodejs-argo" --node-args="-r dotenv/config"
 # node-sbx
-pm2 start node_modules/node-sbx/index.js --name "node-sbx" --node-args="-r dotenv/config"
+pm2 start node-sbx --name "node-sbx" --node-args="-r dotenv/config"
 ```
 
 ### 其他PM命令
