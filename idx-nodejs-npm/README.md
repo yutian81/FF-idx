@@ -83,17 +83,43 @@ previews = {
 ### 不要 start.sh 直接启动
 ```bash
 previews = {
-  web = {
-    command = ["npx" "nodejs-argo"];
-    manager = "web";
-    env = {
-      UUID="";
-      NEZHA_SERVER="";
-      NEZHA_KEY="";
-      ARGO_DOMAIN="";
-      ARGO_AUTH="";
-      CFIP="cf.090227.xyz";
-      NAME="IDX";
+  enable = true;
+  previews = {
+    web = {
+      command = ["npx" "nodejs-argo"];
+      manager = "web";
+      env = {
+        UUID="";
+        NEZHA_SERVER="";
+        NEZHA_KEY="";
+        ARGO_DOMAIN="";
+        ARGO_AUTH="";
+        CFIP="cf.090227.xyz";
+        NAME="IDX";
+      };
+    };
+  };
+};
+```
+
+或者将变量放在全局
+```bash
+env = {
+  UUID="";
+  NEZHA_SERVER="";
+  NEZHA_KEY="";
+  ARGO_DOMAIN="";
+  ARGO_AUTH="";
+  CFIP="cf.090227.xyz";
+  NAME="IDX";
+};
+
+previews = {
+  enable = true;
+  previews = {
+    web = {
+      command = ["npx" "nodejs-argo"];
+      manager = "web";
     };
   };
 };
