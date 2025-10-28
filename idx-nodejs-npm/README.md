@@ -62,3 +62,11 @@ npx npx node-sbx
 ```bash
 npx npx node-sbx --env-file ./myapp-nodejs/.env
 ```
+
+## 保持后台运行且自启动
+
+- 安装 PM2：`npm install -g pm2`
+- 运行项目
+```bash
+pm2 start node_modules/nodejs-argo/index.js --name argo-service --node-args="-r dotenv/config"
+```
