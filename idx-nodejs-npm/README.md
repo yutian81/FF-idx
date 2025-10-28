@@ -22,14 +22,6 @@ export NAME=""
 npx nodejs-argo
 ```
 
-### 环境变量
-或使用 `.env` 文件加载变量
-
-```bash
-# 加载变量并启动
-node -r dotenv/config node_modules/nodejs-argo/index.js
-```
-
 ----
 
 ## SingBox 内核
@@ -54,14 +46,6 @@ export ARGO_AUTH=""
 export CFIP="cf.090227.xyz"
 export NAME="IDX"
 npx npx node-sbx
-```
-
-### 环境变量
-或使用 `.env` 文件加载变量
-
-```bash
-# 加载变量并启动
-node -r dotenv/config node_modules/node-sbx/index.js
 ```
 
 ---
