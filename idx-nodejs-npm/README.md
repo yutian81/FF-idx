@@ -51,8 +51,8 @@ export NEZHA_SERVER=""
 export NEZHA_KEY=""
 export ARGO_DOMAIN=""
 export ARGO_AUTH=""
-export CFIP=""
-export NAME=""
+export CFIP="cf.090227.xyz"
+export NAME="IDX"
 npx npx node-sbx
 ```
 
@@ -68,6 +68,7 @@ node -r dotenv/config node_modules/node-sbx/index.js
 
 ## 保持自启动
 
+### 借助 start.sh 文件启动
 修改 dev.nix 中 previews = { ... }; 其中的启动命令
 
 ```bash
@@ -75,6 +76,25 @@ previews = {
   web = {
     command = ["bash" "start.sh"];
     manager = "web";
+  };
+};
+```
+
+### 不要 start.sh 直接启动
+```bash
+previews = {
+  web = {
+    command = ["npx" "nodejs-argo"];
+    manager = "web";
+    env = {
+      UUID="";
+      NEZHA_SERVER="";
+      NEZHA_KEY="";
+      ARGO_DOMAIN="";
+      ARGO_AUTH="";
+      CFIP="cf.090227.xyz";
+      NAME="IDX";
+    };
   };
 };
 ```
