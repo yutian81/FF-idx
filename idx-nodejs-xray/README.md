@@ -1,6 +1,6 @@
 ## Xray 内核
 
-### 全局安装（推荐）
+### 安装依赖包
 ```bash
 npm install nodejs-argo
 ```
