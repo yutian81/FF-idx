@@ -66,46 +66,6 @@ node -r dotenv/config node_modules/node-sbx/index.js
 
 ---
 
-## 保持后台运行
+## 保持自启动
 
-### 安装 PM2
-```bash
-npm install pm2
-```
-
-### 加载 .env 变量文件
-```bash
-# nodejs-argo
-pm2 start nodejs-argo --name "nodejs-argo" --node-args="-r dotenv/config"
-# node-sbx
-pm2 start node-sbx --name "node-sbx" --node-args="-r dotenv/config"
-```
-
-### 其他PM命令
-```bash
-# 查看进程状态
-pm2 status
-# 查看实时日志
-pm2 logs nodejs-argo
-# 设置开机自启
-pm2 startup
-# 保存当前的进程列表
-pm2 save
-```
-
-### 更新 .env 后需要重启项目
-```bash
-pm2 restart nodejs-argo
-pm2 restart node-sbx
-```
-
-### screen 后台运行
-```bash
-# 创建screen会话
-screen -S nodejs-argo
-# 运行应用
-nodejs-argo
-# 按 Ctrl+A 然后按 D 分离会话
-# 重新连接
-screen -r nodejs-argo
-```
+修改 dev.nix 中 previews = { ... }; 其中的启动命令
