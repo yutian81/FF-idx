@@ -101,10 +101,10 @@ pm2 restart node-sbx
 ### screen 后台运行
 ```bash
 # 创建screen会话
-screen -S argo
+screen -S nodejs-argo
 # 运行应用
 nodejs-argo
 # 按 Ctrl+A 然后按 D 分离会话
 # 重新连接
-screen -r argo
+screen -r nodejs-argo
 ```
