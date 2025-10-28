@@ -73,3 +73,15 @@ pm2 start node_modules/nodejs-argo/index.js --name nodejs-argo --node-args="-r d
 # node-sbx
 pm2 start node_modules/node-sbx/index.js --name node-sbx --node-args="-r dotenv/config"
 ```
+
+- 其他PM命令
+```bash
+# 查看进程状态
+pm2 status
+# 查看实时日志
+pm2 logs nodejs-argo
+# 设置开机自启
+pm2 startup
+# 保存当前的进程列表
+pm2 save
+```
