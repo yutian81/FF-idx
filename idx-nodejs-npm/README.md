@@ -69,3 +69,12 @@ node -r dotenv/config node_modules/node-sbx/index.js
 ## 保持自启动
 
 修改 dev.nix 中 previews = { ... }; 其中的启动命令
+
+```bash
+previews = {
+  web = {
+    command = ["bash" "start.sh"];
+    manager = "web";
+  };
+};
+```
