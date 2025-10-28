@@ -30,7 +30,7 @@ export ARGO_DOMAIN=""
 export ARGO_AUTH=""
 export CFIP=""
 export NAME=""
-npx nodejs-argo # npx node-sbx
+npx nodejs-argo # 或 npx node-sbx
 ```
 
 ---
