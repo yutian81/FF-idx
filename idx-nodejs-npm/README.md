@@ -26,10 +26,8 @@ npx nodejs-argo
 或使用 `.env` 文件加载变量
 
 ```bash
-# 加载变量
+# 加载变量并启动
 node -r dotenv/config node_modules/nodejs-argo/index.js
-# 启动项目
-npx nodejs-argo
 ```
 
 ----
