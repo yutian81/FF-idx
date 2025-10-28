@@ -2,7 +2,7 @@
 
 ### 全局安装（推荐）
 ```bash
-npm install -g nodejs-argo
+npm install nodejs-argo
 ```
 
 ### 启动命令
