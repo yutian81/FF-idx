@@ -75,9 +75,9 @@ npm install pm2
 ### 运行项目
 ```bash
 # nodejs-argo
-pm2 start node_modules/nodejs-argo/index.js --name nodejs-argo --node-args="-r dotenv/config"
+pm2 start node_modules/nodejs-argo/index.js --name "nodejs-argo" --node-args="-r dotenv/config"
 # node-sbx
-pm2 start node_modules/node-sbx/index.js --name node-sbx --node-args="-r dotenv/config"
+pm2 start node_modules/node-sbx/index.js --name "node-sbx" --node-args="-r dotenv/config"
 ```
 
 ### 其他PM命令
