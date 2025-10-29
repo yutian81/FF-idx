@@ -1,3 +1,5 @@
-"dependencies": {
-  "nodejs-argo": "^2.0.2"
+{
+  "dependencies": {
+    "nodejs-argo": "^2.0.2"
+  }
 }
