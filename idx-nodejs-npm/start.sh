@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
+TARGET_MODULE="nodejs-argo"
+
 if [ ! -d "node_modules" ]; then
-  echo "node_modules 不存在，正在安装依赖..."
-  npm install
+  echo "node_modules 目录不存在，正在安装 ${TARGET_MODULE}..."
+  npm install "${TARGET_MODULE}"
+elif ! npm list "${TARGET_MODULE}" --depth=0 >/dev/null 2>&1; then
+  echo "检测到 ${TARGET_MODULE} 未安装或版本不匹配，正在安装 ${TARGET_MODULE}..."
+  npm install "${TARGET_MODULE}"
 else
-  if ! npm ls --depth=0 >/dev/null 2>&1; then
-    echo "检测到依赖未安装或版本不匹配，正在安装依赖..."
-    npm install
-  else
-    echo "依赖已安装且版本匹配，跳过 npm install"
-  fi
+  echo "${TARGET_MODULE} 依赖已安装且版本匹配，跳过 npm install"
 fi
 
 # 配置环境变量
