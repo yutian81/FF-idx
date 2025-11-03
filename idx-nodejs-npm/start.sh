@@ -2,6 +2,7 @@
 
 TARGET_MODULE="nodejs-argo"
 
+# 安装依赖
 if [ ! -d "node_modules" ]; then
   echo "node_modules 目录不存在，正在安装 ${TARGET_MODULE}..."
   npm install "${TARGET_MODULE}"
@@ -22,4 +23,4 @@ export CFIP="cf.090227.xyz"
 export NAME="IDX"
 
 # 启动服务
-npx nodejs-argo
+npx "${TARGET_MODULE}"
