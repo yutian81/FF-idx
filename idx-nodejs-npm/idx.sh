@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 TARGET_MODULE="nodejs-argo"
 
 # 安装依赖
