@@ -13,7 +13,7 @@ else
   echo "${TARGET_MODULE} 依赖已安装且版本匹配，跳过 npm install"
 fi
 
-# 配置环境变量
+# 配置环境变量（若需要确保变量一定存在，即使只是空值时，应使用 :=）
 export UUID=${UUID:-''}
 export NEZHA_SERVER=${NEZHA_SERVER:-''}
 export NEZHA_KEY=${NEZHA_KEY:-''}
