@@ -111,3 +111,22 @@ Auto Refresh Page
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/frp.sh)
 ```
+
+---
+
+## 一键全自动安装，适用于vps
+
+> 暂时仅支持Debian和乌班图系统
+
+```bash
+curl -o idx.sh -Ls \
+  "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/idx.sh" && \
+chmod +x idx.sh && \
+UUID=1234 \
+NEZHA_SERVER=nezha.example.com \
+NEZHA_KEY=abcd1234 \
+ARGO_DOMAIN=myargo.site \
+ARGO_AUTH=eyJhIjoixxxxxx \
+NAME=IDX \
+./idx.sh
+```
