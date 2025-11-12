@@ -20,7 +20,7 @@ export NEZHA_KEY=${NEZHA_KEY:-''}
 export ARGO_DOMAIN=${ARGO_DOMAIN:-''}
 export ARGO_AUTH=${ARGO_AUTH:-''}
 export CFIP=${CFIP:-'cf.090227.xyz'}
-export NAME=${NAME:-'IDX'}
+export NAME=${NAME:-''}
 
 # 启动服务
 npx "${TARGET_MODULE}"
