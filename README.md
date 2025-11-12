@@ -119,14 +119,14 @@ bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/frp.sh)
 > 暂时仅支持Debian和乌班图系统
 
 ```bash
-curl -o idx.sh -Ls \
-  "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/idx.sh" && \
-chmod +x idx.sh && \
+curl -o vpsnpm.sh -Ls \
+  "https://raw.githubusercontent.com/yutian81/FF-idx/main/vpsnpm.sh" && \
+chmod +x vpsnpm.sh && \
 UUID=1234 \
 NEZHA_SERVER=nezha.example.com \
 NEZHA_KEY=abcd1234 \
 ARGO_DOMAIN=myargo.site \
 ARGO_AUTH=eyJhIjoixxxxxx \
 NAME=IDX \
-./idx.sh
+./vpsnpm.sh
 ```
