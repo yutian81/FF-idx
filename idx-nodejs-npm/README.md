@@ -17,7 +17,7 @@ ARGO_AUTH=eyJhIjoixxxxxx \
 ```bash
 previews = {
   web = {
-    command = ["bash" "start.sh"];
+    command = ["bash" "idx.sh"];
     manager = "web";
   };
 };
