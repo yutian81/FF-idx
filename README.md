@@ -130,3 +130,5 @@ ARGO_AUTH=eyJhIjoixxxxxx \
 NAME=IDX \
 ./vpsnpm.sh
 ```
+
+一键卸载
