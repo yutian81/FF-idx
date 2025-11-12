@@ -58,7 +58,7 @@ if [ ! -f "$SERVICE_FILE" ]; then
     export ARGO_DOMAIN=${ARGO_DOMAIN:=''}
     export ARGO_AUTH=${ARGO_AUTH:=''}
     export CFIP=${CFIP:='cf.090227.xyz'}
-    export NAME=${NAME:=''}
+    export NAME=${NAME:='NPM'}
 
     cat > "$SERVICE_FILE" << EOF
 [Unit]
