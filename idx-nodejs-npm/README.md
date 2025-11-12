@@ -1,4 +1,6 @@
-## 一键全自动安装
+## 一键全自动安装，适用于vps
+
+> 暂时仅支持Debian和乌班图系统
 
 ```bash
 curl -o idx.sh -Ls \
@@ -12,21 +14,9 @@ ARGO_AUTH=eyJhIjoixxxxxx \
 NAME=IDX \
 ./idx.sh
 ```
-
-再修改 dev.nix 中 previews = { ... }; 其中的启动命令
-
-```bash
-previews = {
-  web = {
-    command = ["bash" "idx.sh"];
-    manager = "web";
-  };
-};
-```
-
 ----
 
-## 手动部署说明
+## IDX部署说明
 
 ### 安装依赖包
 
