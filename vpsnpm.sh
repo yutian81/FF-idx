@@ -3,7 +3,7 @@
 # --- 配置区 ---
 SERVICE_NAME="nodejs-argo"
 SERVICE_DIR="/opt/${SERVICE_NAME}"
-SCRIPT_PATH="${SERVICE_DIR}/idx.sh"
+SCRIPT_PATH="${SERVICE_DIR}/vpsnpm.sh"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 TARGET_MODULE="nodejs-argo"
 SYSTEM_USER="root"
