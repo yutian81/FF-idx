@@ -132,3 +132,7 @@ NAME=IDX \
 ```
 
 一键卸载
+
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/yutian81/FF-idx/main/un-vpsnpm.sh)
+```
