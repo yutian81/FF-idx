@@ -131,6 +131,16 @@ NAME=IDX \
 ./vpsnpm.sh
 ```
 
+如果没有nodejs环境，需要先安装
+
+```bash
+# 1. 安装 NodeSource 仓库 (以 v20 LTS 为例)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+# 2. 安装 Node.js 和 npm
+sudo apt install -y nodejs
+```
+
 一键卸载
 
 ```bash
