@@ -1,7 +1,15 @@
 ## 一键全自动安装
 
 ```bash
-curl -Ls "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/idx.sh" -o idx.sh && chmod +x idx.sh && UUID=1234 NEZHA_SERVER=nezha.example.com NEZHA_KEY=abcd1234 ARGO_DOMAIN=myargo.site ARGO_AUTH=eyJhIjoixxxxxx ./idx.sh
+curl -o idx.sh -Ls \
+  "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/idx.sh" && \
+chmod +x idx.sh && \
+UUID=1234 \
+NEZHA_SERVER=nezha.example.com \
+NEZHA_KEY=abcd1234 \
+ARGO_DOMAIN=myargo.site \
+ARGO_AUTH=eyJhIjoixxxxxx \
+./idx.sh
 ```
 
 再修改 dev.nix 中 previews = { ... }; 其中的启动命令
