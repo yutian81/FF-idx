@@ -144,3 +144,7 @@ fi
 # 启动服务 (此部分由 Systemd ExecStart 调用)
 echo "--- 正在启动核心服务 (由 Systemd 调用) ---"
 npx "${TARGET_MODULE}"
+
+# 输出节点信息
+echo "--- 复制以下Base64码到代理软件 ---"
+cat "${SERVICE_DIR}/tmp/sub.txt"
