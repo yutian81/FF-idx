@@ -116,7 +116,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/frp.sh)
 
 ## 一键全自动安装，适用于vps
 
-> 暂时仅支持Debian和乌班图系统
+> 支持 Debian | 乌班图 | Alpine
 
 ```bash
 curl -o vpsnpm.sh -Ls "https://raw.githubusercontent.com/yutian81/FF-idx/main/vpsnpm.sh" && \
@@ -128,16 +128,6 @@ ARGO_DOMAIN=myargo.site \
 ARGO_AUTH=eyJhIjoixxxxxx \
 NAME=IDX \
 ./vpsnpm.sh
-```
-
-如果没有nodejs环境，需要先安装
-
-```bash
-# 1. 安装 NodeSource 仓库 (以 v20 LTS 为例)
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-
-# 2. 安装 Node.js 和 npm
-sudo apt install -y nodejs
 ```
 
 一键卸载
