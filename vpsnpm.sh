@@ -65,7 +65,6 @@ else
         alpine)
             echo "ℹ️ 检测到 Alpine Linux，使用 apk 安装 Node.js v${NODE_VERSION}..."
             apk update
-            # 安装 nodejs-current 及其依赖
             apk add --no-cache nodejs-current npm
             ;;
         *)
@@ -193,7 +192,10 @@ EOF
         systemctl daemon-reload
         systemctl enable "${SERVICE_NAME}.service"
         systemctl start "${SERVICE_NAME}.service"
+        
         echo "🎉 服务安装并启动成功！请检查状态：sudo systemctl status ${SERVICE_NAME}"
+        echo "--- 复制以下Base64码到代理软件 ---"
+        cat "${SERVICE_DIR}/tmp/sub.txt"
         exit 0
     fi
 fi
@@ -204,7 +206,3 @@ fi
 
 echo "--- 正在启动核心服务 (由 Systemd/OpenRC 调用) ---"
 npx "${TARGET_MODULE}"
-
-# 输出节点信息
-echo "--- 复制以下Base64码到代理软件 ---"
-cat "${SERVICE_DIR}/tmp/sub.txt"
