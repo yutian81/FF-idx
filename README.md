@@ -121,7 +121,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/frp.sh)
 ```bash
 curl -o vpsnpm.sh -Ls "https://raw.githubusercontent.com/yutian81/FF-idx/main/vpsnpm.sh" && \
 chmod +x vpsnpm.sh && \
-UUID=b9274e56-5671-4887-9b10-a3d58c06b0f1 \
+UUID=822fb34f-af37-445f-8c05-ae35d5423b34 \
 NEZHA_SERVER=nezha.example.com \
 NEZHA_KEY=abcd1234 \
 ARGO_DOMAIN=myargo.site \
