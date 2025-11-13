@@ -182,7 +182,7 @@ EOF
     fi
 }
 
-# 核心进程执行 (由服务管理器或交互式调用)
+# 核心进程执行
 start_core_process() {
     echo "--- 正在启动核心服务 (npx ${TARGET_MODULE}) ---"
     npx "${TARGET_MODULE}"
