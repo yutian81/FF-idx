@@ -4,14 +4,13 @@
 SERVICE_NAME="nodejs-argo"
 SERVICE_DIR="/opt/${SERVICE_NAME}"
 SCRIPT_PATH="${SERVICE_DIR}/vpsnpm.sh"
+SCRIPT_SOURCE_PATH=$(readlink -f "$0")
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 TARGET_MODULE="nodejs-argo"
 SYSTEM_USER="root"
+NODE_VERSION="20"
 
-# ----------------------------------------
 # 权限和目录准备
-# ----------------------------------------
-
 if [ "$EUID" -ne 0 ] && [ ! -f "$SERVICE_FILE" ]; then
     echo "🚨 首次安装服务需要 root 权限。请使用 sudo 运行此脚本："
     echo "sudo bash $0"
@@ -21,16 +20,63 @@ fi
 mkdir -p "${SERVICE_DIR}"
 cd "${SERVICE_DIR}" || { echo "无法进入目录 ${SERVICE_DIR}，退出。"; exit 1; }
 
-if [[ "$0" != "$SCRIPT_PATH" ]]; then
+if [[ "$SCRIPT_SOURCE_PATH" != "$SCRIPT_PATH" ]]; then
     echo "🔄 将脚本复制到目标路径: ${SCRIPT_PATH}"
-    cp "$0" "$SCRIPT_PATH"
+    cp "$SCRIPT_SOURCE_PATH" "$SCRIPT_PATH"
     chmod +x "$SCRIPT_PATH"
 fi
 
-# ----------------------------------------
-# 依赖安装和环境准备
-# ----------------------------------------
+# 安装 Node.js 环境
+echo "--- 检查和安装 Node.js 环境 (LTS v${NODE_VERSION}) ---"
 
+if command -v node >/dev/null 2>&1; then
+    CURRENT_NODE_VERSION=$(node -v | sed 's/v//')
+    echo "✅ Node.js 已安装，当前版本: ${CURRENT_NODE_VERSION}"
+else
+    echo "⚠️ Node.js 未安装，开始自动安装..."
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        echo "🚨 无法识别系统类型，请手动安装 Node.js。"
+        exit 1
+    fi
+
+    # 支持 Debian/Ubuntu, RHEL/CentOS/Fedora, Alpine 系统
+    case "$OS" in
+        debian|ubuntu|devuan)
+            sudo apt update
+            sudo apt install -y ca-certificates curl gnupg
+            sudo mkdir -p /etc/apt/keyrings
+            curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+            echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_VERSION.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list >/dev/null
+            sudo apt update
+            sudo apt install nodejs -y
+            ;;
+        centos|rhel|fedora)
+            # 安装 Node.js (RHEL/CentOS/Fedora)
+            sudo dnf install -y nodejs
+            ;;
+        alpine)
+            echo "ℹ️ 检测到 Alpine Linux，使用 apk 安装 Node.js v${NODE_VERSION}..."
+            apk update
+            apk add --no-cache nodejs-current npm
+            ;;
+        *)
+            echo "🚨 系统 ${OS} 不支持自动安装 Node.js，请手动安装 Node.js v${NODE_VERSION} 或更高版本。"
+            exit 1
+            ;;
+    esac
+
+    if command -v node >/dev/null 2>&1; then
+        echo "🎉 Node.js v${NODE_VERSION} 安装成功！"
+    else
+        echo "❌ Node.js 安装失败，退出。"
+        exit 1
+    fi
+fi
+
+# 安装 Node.js 依赖 nodejs-argo 包
 echo "--- 检查和安装 Node.js 依赖: ${TARGET_MODULE} ---"
 
 if [ ! -d "node_modules" ]; then
@@ -43,22 +89,18 @@ else
     echo "${TARGET_MODULE} 依赖已安装且版本匹配，跳过 npm install"
 fi
 
-# ----------------------------------------
 # 检查并安装 Systemd 服务
-# ----------------------------------------
-
 if [ ! -f "$SERVICE_FILE" ]; then
     echo "--- 配置 Systemd 服务: ${SERVICE_FILE} ---"
 
-    # 使用 := 语法确保所有变量都被设置并赋值
-    # 如果变量未设置或为空，将使用默认值 ('')，并将默认值赋给变量本身
-    export UUID=${UUID:='3001b2b7-e810-45bc-a1af-2c302b530d40'}
-    export NEZHA_SERVER=${NEZHA_SERVER:=''}
-    export NEZHA_KEY=${NEZHA_KEY:=''}
-    export ARGO_DOMAIN=${ARGO_DOMAIN:=''}
-    export ARGO_AUTH=${ARGO_AUTH:=''}
-    export CFIP=${CFIP:='cf.090227.xyz'}
-    export NAME=${NAME:='NPM'}
+    # 变量赋值
+    export UUID=${UUID:-'3001b2b7-e810-45bc-a1af-2c302b530d40'}
+    export NEZHA_SERVER=${NEZHA_SERVER:-''}
+    export NEZHA_KEY=${NEZHA_KEY:-''}
+    export ARGO_DOMAIN=${ARGO_DOMAIN:-''}
+    export ARGO_AUTH=${ARGO_AUTH:-''}
+    export CFIP=${CFIP:-'cf.090227.xyz'}
+    export NAME=${NAME:-'NPM'}
 
     cat > "$SERVICE_FILE" << EOF
 [Unit]
@@ -91,7 +133,6 @@ WantedBy=multi-user.target
 EOF
 
     echo "✅ Systemd 服务文件创建成功。"
-
     systemctl daemon-reload
     systemctl enable "${SERVICE_NAME}.service"
     systemctl start "${SERVICE_NAME}.service"
@@ -100,10 +141,6 @@ EOF
     exit 0
 fi
 
-# ----------------------------------------
 # 启动服务 (此部分由 Systemd ExecStart 调用)
-# ----------------------------------------
-
 echo "--- 正在启动核心服务 (由 Systemd 调用) ---"
-
 npx "${TARGET_MODULE}"
