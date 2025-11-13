@@ -8,7 +8,6 @@ SCRIPT_SOURCE_PATH=$(readlink -f "$0")
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 TARGET_MODULE="nodejs-argo"
 SYSTEM_USER="root"
-NODE_VERSION="20"
 
 # ----------------------------------------
 # 权限和目录准备
@@ -33,7 +32,7 @@ fi
 # Node.js 环境准备
 # ----------------------------------------
 
-echo "--- 检查和安装 Node.js 环境 (LTS v${NODE_VERSION}) ---"
+echo "--- 检查和安装 Node.js 环境 ---"
 
 if command -v node >/dev/null 2>&1; then
     CURRENT_NODE_VERSION=$(node -v | sed 's/v//')
@@ -52,29 +51,23 @@ else
     case "$OS" in
         debian|ubuntu|devuan)
             sudo apt update
-            sudo apt install -y ca-certificates curl gnupg
-            sudo mkdir -p /etc/apt/keyrings
-            curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-            echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_VERSION.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list >/dev/null
-            sudo apt update
             sudo apt install nodejs -y
             ;;
         centos|rhel|fedora)
             sudo dnf install -y nodejs
             ;;
         alpine)
-            echo "ℹ️ 检测到 Alpine Linux，使用 apk 安装 Node.js v${NODE_VERSION}..."
             apk update
             apk add --no-cache nodejs-current npm
             ;;
         *)
-            echo "🚨 系统 ${OS} 不支持自动安装 Node.js，请手动安装 Node.js v${NODE_VERSION} 或更高版本。"
+            echo "🚨 系统 ${OS} 不支持自动安装 Node.js，请手动安装"
             exit 1
             ;;
     esac
 
     if command -v node >/dev/null 2>&1; then
-        echo "🎉 Node.js v${NODE_VERSION} 安装成功！"
+        echo "🎉 Node.js 安装成功！"
     else
         echo "❌ Node.js 安装失败，退出。"
         exit 1
@@ -123,11 +116,9 @@ if [ ! -f "$SERVICE_FILE" ]; then
 
 name="${SERVICE_NAME}"
 description="Auto-configured NodeJS Argo Tunnel Service"
-
 command="/usr/bin/env"
 command_args="bash ${SCRIPT_PATH}"
 command_background="yes"
-
 directory="${SERVICE_DIR}"
 user="${SYSTEM_USER}"
 
@@ -146,7 +137,6 @@ start_pre() {
     export CFIP="${CFIP}"
     export NAME="${NAME}"
 }
-
 EOF
         chmod +x "$OPENRC_SERVICE_FILE"
         echo "✅ OpenRC 服务文件创建成功。"
@@ -166,7 +156,6 @@ After=network.target
 Type=simple
 User=${SYSTEM_USER}
 Group=${SYSTEM_USER}
-
 Environment=UUID=${UUID}
 Environment=NEZHA_SERVER=${NEZHA_SERVER}
 Environment=NEZHA_PORT=${NEZHA_PORT}
@@ -175,10 +164,8 @@ Environment=ARGO_DOMAIN=${ARGO_DOMAIN}
 Environment=ARGO_AUTH=${ARGO_AUTH}
 Environment=CFIP=${CFIP}
 Environment=NAME=${NAME}
-
 WorkingDirectory=${SERVICE_DIR}
 ExecStart=${SCRIPT_PATH}
-
 StandardOutput=journal
 StandardError=journal
 Restart=always
