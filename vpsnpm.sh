@@ -94,13 +94,13 @@ if [ ! -f "$SERVICE_FILE" ]; then
     echo "--- 配置 Systemd 服务: ${SERVICE_FILE} ---"
 
     # 变量赋值
-    export UUID=${UUID:-'3001b2b7-e810-45bc-a1af-2c302b530d40'}
-    export NEZHA_SERVER=${NEZHA_SERVER:-''}
-    export NEZHA_KEY=${NEZHA_KEY:-''}
-    export ARGO_DOMAIN=${ARGO_DOMAIN:-''}
-    export ARGO_AUTH=${ARGO_AUTH:-''}
-    export CFIP=${CFIP:-'cf.090227.xyz'}
-    export NAME=${NAME:-'NPM'}
+    export UUID=${UUID:='3001b2b7-e810-45bc-a1af-2c302b530d40'}
+    export NEZHA_SERVER=${NEZHA_SERVER:=''}
+    export NEZHA_KEY=${NEZHA_KEY:=''}
+    export ARGO_DOMAIN=${ARGO_DOMAIN:=''}
+    export ARGO_AUTH=${ARGO_AUTH:=''}
+    export CFIP=${CFIP:='cf.090227.xyz'}
+    export NAME=${NAME:='NPM'}
 
     cat > "$SERVICE_FILE" << EOF
 [Unit]
