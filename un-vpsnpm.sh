@@ -4,7 +4,7 @@
 SERVICE_NAME="nodejs-argo"
 SERVICE_DIR="/opt/${SERVICE_NAME}"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
-OPENRC_SERVICE_FILE="/etc/init.d/${SERVICE_NAME}" # 增加 OpenRC 路径
+OPENRC_SERVICE_FILE="/etc/init.d/${SERVICE_NAME}"
 # --- 配置区结束 ---
 
 # 权限检查
