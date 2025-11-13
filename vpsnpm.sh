@@ -63,11 +63,11 @@ install_node() {
 
     case "$OS" in
         debian|ubuntu|devuan)
-            sudo apt update
-            sudo apt install -y nodejs
+            apt update
+            apt install -y nodejs npm
             ;;
         centos|rhel|fedora)
-            sudo dnf install -y nodejs
+            dnf install -y nodejs
             ;;
         alpine)
             apk update
