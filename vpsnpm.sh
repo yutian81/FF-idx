@@ -71,7 +71,6 @@ install_node() {
             ;;
         alpine)
             apk update
-            # 安装 nodejs-current 及其依赖
             apk add --no-cache nodejs-current npm
             ;;
         *)
