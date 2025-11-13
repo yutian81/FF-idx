@@ -10,7 +10,10 @@ TARGET_MODULE="nodejs-argo"
 SYSTEM_USER="root"
 NODE_VERSION="20"
 
+# ----------------------------------------
 # 权限和目录准备
+# ----------------------------------------
+
 if [ "$EUID" -ne 0 ] && [ ! -f "$SERVICE_FILE" ]; then
     echo "🚨 首次安装服务需要 root 权限。请使用 sudo 运行此脚本："
     echo "sudo bash $0"
@@ -26,7 +29,10 @@ if [[ "$SCRIPT_SOURCE_PATH" != "$SCRIPT_PATH" ]]; then
     chmod +x "$SCRIPT_PATH"
 fi
 
-# 安装 Node.js 环境
+# ----------------------------------------
+# Node.js 环境准备
+# ----------------------------------------
+
 echo "--- 检查和安装 Node.js 环境 (LTS v${NODE_VERSION}) ---"
 
 if command -v node >/dev/null 2>&1; then
@@ -54,12 +60,12 @@ else
             sudo apt install nodejs -y
             ;;
         centos|rhel|fedora)
-            # 安装 Node.js (RHEL/CentOS/Fedora)
             sudo dnf install -y nodejs
             ;;
         alpine)
             echo "ℹ️ 检测到 Alpine Linux，使用 apk 安装 Node.js v${NODE_VERSION}..."
             apk update
+            # 安装 nodejs-current 及其依赖
             apk add --no-cache nodejs-current npm
             ;;
         *)
@@ -76,7 +82,10 @@ else
     fi
 fi
 
-# 安装 Node.js 依赖 nodejs-argo 包
+# ----------------------------------------
+# Node.js 依赖安装
+# ----------------------------------------
+
 echo "--- 检查和安装 Node.js 依赖: ${TARGET_MODULE} ---"
 
 if [ ! -d "node_modules" ]; then
@@ -89,20 +98,67 @@ else
     echo "${TARGET_MODULE} 依赖已安装且版本匹配，跳过 npm install"
 fi
 
-# 检查并安装 Systemd 服务
+# ----------------------------------------
+# 检查并安装 Systemd/OpenRC 服务
+# ----------------------------------------
+
 if [ ! -f "$SERVICE_FILE" ]; then
-    echo "--- 配置 Systemd 服务: ${SERVICE_FILE} ---"
+    echo "--- 配置服务 ---"
 
     # 变量赋值
-    export UUID=${UUID:='3001b2b7-e810-45bc-a1af-2c302b530d40'}
-    export NEZHA_SERVER=${NEZHA_SERVER:=''}
-    export NEZHA_KEY=${NEZHA_KEY:=''}
-    export ARGO_DOMAIN=${ARGO_DOMAIN:=''}
-    export ARGO_AUTH=${ARGO_AUTH:=''}
-    export CFIP=${CFIP:='cf.090227.xyz'}
-    export NAME=${NAME:='NPM'}
+    UUID=${UUID:='3001b2b7-e810-45bc-a1af-2c302b530d40'}
+    NEZHA_SERVER=${NEZHA_SERVER:=''}
+    NEZHA_PORT=${NEZHA_PORT:=''}
+    NEZHA_KEY=${NEZHA_KEY:=''}
+    ARGO_DOMAIN=${ARGO_DOMAIN:=''}
+    ARGO_AUTH=${ARGO_AUTH:=''}
+    CFIP=${CFIP:='cf.090227.xyz'}
+    NAME=${NAME:='NPM'}
 
-    cat > "$SERVICE_FILE" << EOF
+    # 检查是否为 OpenRC 系统 (如 Alpine)
+    if command -v rc-update >/dev/null 2>&1; then
+        OPENRC_SERVICE_FILE="/etc/init.d/${SERVICE_NAME}"
+        echo "ℹ️ 检测到 OpenRC 系统，配置 OpenRC 服务文件: ${OPENRC_SERVICE_FILE}"
+        cat > "$OPENRC_SERVICE_FILE" << EOF
+#!/sbin/openrc-run
+
+name="${SERVICE_NAME}"
+description="Auto-configured NodeJS Argo Tunnel Service"
+
+command="/usr/bin/env"
+command_args="bash ${SCRIPT_PATH}"
+command_background="yes"
+
+directory="${SERVICE_DIR}"
+user="${SYSTEM_USER}"
+
+depend() {
+    need net
+    use dns logger
+}
+
+start_pre() {
+    export UUID="${UUID}"
+    export NEZHA_SERVER="${NEZHA_SERVER}"
+    export NEZHA_PORT="${NEZHA_PORT}"
+    export NEZHA_KEY="${NEZHA_KEY}"
+    export ARGO_DOMAIN="${ARGO_DOMAIN}"
+    export ARGO_AUTH="${ARGO_AUTH}"
+    export CFIP="${CFIP}"
+    export NAME="${NAME}"
+}
+
+EOF
+        chmod +x "$OPENRC_SERVICE_FILE"
+        echo "✅ OpenRC 服务文件创建成功。"
+        rc-update add "${SERVICE_NAME}" default
+        rc-service "${SERVICE_NAME}" start
+        echo "🎉 服务安装并启动成功！请检查状态：rc-service ${SERVICE_NAME} status"
+        exit 0
+        
+    else
+        echo "ℹ️ 检测到 Systemd 系统，配置 Systemd 服务文件: ${SERVICE_FILE}"
+        cat > "$SERVICE_FILE" << EOF
 [Unit]
 Description=Auto-configured NodeJS Argo Tunnel Service (Simplified)
 After=network.target
@@ -114,6 +170,7 @@ Group=${SYSTEM_USER}
 
 Environment=UUID=${UUID}
 Environment=NEZHA_SERVER=${NEZHA_SERVER}
+Environment=NEZHA_PORT=${NEZHA_PORT}
 Environment=NEZHA_KEY=${NEZHA_KEY}
 Environment=ARGO_DOMAIN=${ARGO_DOMAIN}
 Environment=ARGO_AUTH=${ARGO_AUTH}
@@ -132,17 +189,19 @@ RestartSec=5s
 WantedBy=multi-user.target
 EOF
 
-    echo "✅ Systemd 服务文件创建成功。"
-    systemctl daemon-reload
-    systemctl enable "${SERVICE_NAME}.service"
-    systemctl start "${SERVICE_NAME}.service"
-
-    echo "🎉 服务安装并启动成功！请检查状态：sudo systemctl status ${SERVICE_NAME}"
-    exit 0
+        echo "✅ Systemd 服务文件创建成功。"
+        systemctl daemon-reload
+        systemctl enable "${SERVICE_NAME}.service"
+        systemctl start "${SERVICE_NAME}.service"
+        echo "🎉 服务安装并启动成功！请检查状态：sudo systemctl status ${SERVICE_NAME}"
+        exit 0
+    fi
 fi
 
-# 启动服务 (此部分由 Systemd ExecStart 调用)
-echo "--- 正在启动核心服务 (由 Systemd 调用) ---"
+# ----------------------------------------
+# 启动服务 (此部分由 Systemd/OpenRC 调用)
+# ----------------------------------------
+echo "--- 正在启动核心服务 (由 Systemd/OpenRC 调用) ---"
 npx "${TARGET_MODULE}"
 
 # 输出节点信息
