@@ -10,6 +10,20 @@ OPENRC_SERVICE_FILE="/etc/init.d/${SERVICE_NAME}"
 TARGET_MODULE="nodejs-argo"
 SYSTEM_USER="root"
 
+# 变量定义和赋值
+define_vars() {
+    unset NAME
+    # 变量赋值
+    export UUID=${UUID:-'3001b2b7-e810-45bc-a1af-2c302b530d40'}
+    export NEZHA_SERVER=${NEZHA_SERVER:-''}
+    export NEZHA_PORT=${NEZHA_PORT:-''}
+    export NEZHA_KEY=${NEZHA_KEY:-''}
+    export ARGO_DOMAIN=${ARGO_DOMAIN:-''}
+    export ARGO_AUTH=${ARGO_AUTH:-''}
+    export CFIP=${CFIP:-'cf.090227.xyz'}
+    export NAME=${NAME:-'NPM'}
+}
+
 # 权限和工作目录设置
 setup_environment() {
     # 权限检查：允许非 root 用户执行已安装的服务脚本，但首次安装必须是 root
@@ -84,20 +98,6 @@ install_deps() {
     else
         echo "${TARGET_MODULE} 依赖已安装且版本匹配，跳过 npm install"
     fi
-}
-
-# 变量定义和赋值
-define_vars() {
-    unset NAME
-    # 变量赋值 (使用 := 确保变量被赋值)
-    UUID=${UUID:='3001b2b7-e810-45bc-a1af-2c302b530d40'}
-    NEZHA_SERVER=${NEZHA_SERVER:=''}
-    NEZHA_PORT=${NEZHA_PORT:=''}
-    NEZHA_KEY=${NEZHA_KEY:=''}
-    ARGO_DOMAIN=${ARGO_DOMAIN:=''}
-    ARGO_AUTH=${ARGO_AUTH:=''}
-    CFIP=${CFIP:='cf.090227.xyz'}
-    NAME=${NAME:='NPM'}
 }
 
 # 创建并启动服务 (始终重建/覆盖)
