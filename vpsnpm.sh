@@ -165,7 +165,7 @@ Environment=CFIP=${CFIP}
 Environment=NAME=${NAME}
 
 WorkingDirectory=${SERVICE_DIR}
-ExecStart=${SCRIPT_PATH} # ExecStart 指向脚本本身
+ExecStart=${SCRIPT_PATH}
 StandardOutput=journal
 StandardError=journal
 Restart=always
@@ -187,14 +187,6 @@ EOF
 start_core_process() {
     echo "--- 正在启动核心服务 (npx ${TARGET_MODULE}) ---"
     npx "${TARGET_MODULE}"
-
-    # 输出节点信息 (不管是否首次运行，都输出)
-    if [ -f "${SERVICE_DIR}/tmp/sub.txt" ]; then
-        echo "--- 复制以下Base64码到代理软件 ---"
-        cat "${SERVICE_DIR}/tmp/sub.txt"
-    else
-        echo "⚠️ 节点信息文件 ${SERVICE_DIR}/tmp/sub.txt 未找到。请检查服务日志。"
-    fi
 }
 
 # 主执行逻辑
