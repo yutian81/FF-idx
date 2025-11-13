@@ -50,8 +50,7 @@ install_node() {
     case "$OS" in
         debian|ubuntu|devuan)
             sudo apt update
-            # 安装 nodejs 和 npm
-            sudo apt install -y nodejs npm
+            sudo apt install -y nodejs
             ;;
         centos|rhel|fedora)
             sudo dnf install -y nodejs
