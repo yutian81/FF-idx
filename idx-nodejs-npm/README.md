@@ -34,6 +34,21 @@ npx nodejs-argo
 # 或 npx node-sbx
 ```
 
+### 一键bash命令
+
+```bash
+curl -LsO "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/start.sh" \
+&& chmod +x start.sh \
+&& SUB_TYPE=nodejs-argo \
+UUID=544f7c5b-fb9d-474e-aed7-d28d4e53f85c \
+NEZHA_SERVER=sos.de5.cc:8008 \
+NEZHA_KEY=111222333 \
+ARGO_DOMAIN=argo.ccc.net \
+ARGO_AUTH=eyxxxxxxxxxxxxxxxxx \
+NAME=IDX \
+./start.sh
+```
+
 ### 修改 dev.nix
 
 #### 第一处：依赖包
