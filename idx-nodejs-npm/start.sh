@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-export SUB_TYPE="${SUB_TYPE:-'nodejs-argo'}"
-export UUID="${UUID:-'32f88fd1-fb7b-489f-ba09-a1c3d55f5294'}"
-export NEZHA_SERVER="${NEZHA_SERVER:-'sos.de5.net:8008'}"
-export NEZHA_KEY="${NEZHA_KEY:-''}"
-export ARGO_DOMAIN="${ARGO_DOMAIN:-''}"
-export ARGO_AUTH="${ARGO_AUTH:-''}"
-export CFIP="${CFIP:-'cf.090227.xyz'}"
-export NAME="${NAME:-'IDX'}"
+export SUB_TYPE=${SUB_TYPE:-'nodejs-argo'}
+export UUID=${UUID:-'32f88fd1-fb7b-489f-ba09-a1c3d55f5294'}
+export NEZHA_SERVER=${NEZHA_SERVER:-'sos.de5.net:8008'}
+export NEZHA_KEY=${NEZHA_KEY:-''}
+export ARGO_DOMAIN=${ARGO_DOMAIN:-''}
+export ARGO_AUTH=${ARGO_AUTH:-''}
+export CFIP=${CFIP:-'cf.090227.xyz'}
+export NAME=${NAME:-'IDX'}
 
 # 安装依赖
 if [ ! -d "node_modules" ]; then
