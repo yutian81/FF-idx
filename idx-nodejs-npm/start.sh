@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export SUB_TYPE=${SUB_TYPE:-'nodejs-argo'}
+export SUB_TYPE=${SUB_TYPE:-'nodejs-argo'} # 可选 node-sbx
 export UUID=${UUID:-'32f88fd1-fb7b-489f-ba09-a1c3d55f5294'}
 export NEZHA_SERVER=${NEZHA_SERVER:-}
 export NEZHA_KEY=${NEZHA_KEY:-}
