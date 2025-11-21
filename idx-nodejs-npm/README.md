@@ -1,5 +1,22 @@
 ## IDX部署说明
 
+### 一键全自动
+
+```bash
+curl -LsO "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/start.sh" \
+&& chmod +x start.sh \
+&& SUB_TYPE="nodejs-argo" \
+UUID="your_uuid" \
+NEZHA_SERVER="your_nezha_server" \
+NEZHA_KEY="your_nezha_key" \
+ARGO_DOMAIN="your_argo_domain" \
+ARGO_AUTH="your_argo_auth" \
+./start.sh \
+&& curl -LsO "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/restart.sh" \
+&& chmod +x restart.sh \
+&& ./restart.sh
+```
+
 ### 安装依赖包
 
 ```bash
