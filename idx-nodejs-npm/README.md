@@ -34,13 +34,20 @@ npx nodejs-argo
 # 或 npx node-sbx
 ```
 
----
+### 修改 dev.nix
 
-## 保持自启动
+#### 第一处：依赖包
 
-### 借助 start.sh 文件启动
+```bash
+  packages = [
+    pkgs.nodejs_20
+    pkgs.openssl_3_3.bin
+  ];
+```
 
-- 修改 dev.nix 中 previews = { ... }; 其中的启动命令
+#### 第二处：启动命令
+
+**借助 start.sh 文件启动**
 
 ```bash
 previews = {
@@ -51,7 +58,9 @@ previews = {
 };
 ```
 
-### 不要 start.sh 直接启动
+---
+
+**不要 start.sh 直接启动**
 
 ```bash
 previews = {
