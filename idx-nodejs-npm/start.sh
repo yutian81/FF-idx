@@ -26,10 +26,10 @@ if [ -f "$FILE" ]; then
   echo "检测到 $FILE，正在优化配置..."
   if ! grep -q "pkgs.openssl_3_3.bin" "$FILE"; then
     sed -i '/pkgs.nodejs_20/a \      pkgs.openssl_3_3.bin' "$FILE"
-    echo "已添加 pkgs.openssl_3_3.bin"
+    echo "已添加依赖包: pkgs.openssl_3_3.bin"
   fi
   sed -i 's|command = \["npm" "run" "dev" .*\];|command = ["bash" "start.sh"];|' "$FILE"
-  echo "✅ 已修改预览启动命令"
+  echo "✅ 已修改预览启动命令: 'bash' 'start.sh'"
 else
   echo "⚠️ 警告: 未找到 $FILE，跳过环境修改"
 fi
