@@ -20,5 +20,27 @@ else
   echo "${SUB_TYPE} 依赖已安装且版本匹配，跳过 npm install"
 fi
 
+# 修改 IDX 配置文件
+FILE=".idx/dev.nix"
+
+if [ -f "$FILE" ]; then
+    echo "检测到 $FILE，正在优化配置..."
+    if ! grep -q "pkgs.openssl_3_3.bin" "$FILE"; then
+        sed -i '/pkgs.nodejs_20/a \      pkgs.openssl_3_3.bin' "$FILE"
+        echo "已添加 pkgs.openssl_3_3.bin"
+    fi
+    sed -i 's|command = \["npm" "run" "dev" .*\];|command = ["bash" "start.sh"];|' "$FILE"
+    echo "✅ 已修改预览启动命令"
+else
+    echo "⚠️ 警告: 未找到 $FILE，跳过环境修改"
+fi
+
 # 启动服务
 npx "${SUB_TYPE}"
+
+echo "----------------------------------------------------"
+echo "✅ 检测到 .idx/dev.nix 已更新"
+echo "请点击 IDX 界面右下角的 'Rebuild' 按钮以应用新配置。"
+echo "或者按下 Ctrl+Shift+P，搜索并运行: 'Rebuild Environment'"
+echo "----------------------------------------------------"
+
