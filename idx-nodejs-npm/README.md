@@ -1,40 +1,6 @@
-## IDX部署说明
+# IDX部署说明
 
-### 安装依赖包
-
-```bash
-# xray内核
-npm install nodejs-argo
-
-# singbox内核
-npm install node-sbx
-```
-
-### 启动命令
-
-```bash
-# xray内核
-npx nodejs-argo
-
-# singbox内核
-npx node-sbx
-```
-
-### 带变量启动
-
-```bash
-export UUID=""
-export NEZHA_SERVER=""
-export NEZHA_KEY=""
-export ARGO_DOMAIN=""
-export ARGO_AUTH=""
-export CFIP=""
-export NAME=""
-npx nodejs-argo
-# 或 npx node-sbx
-```
-
-### 一键bash命令
+## 一键bash命令，全自动
 
 ```bash
 curl -LsO "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/start.sh" \
@@ -49,7 +15,47 @@ NAME=IDX \
 ./start.sh
 ```
 
-### 修改 dev.nix
+**部署完成后，点击页面上的 rebuild，等待重建环境即可**
+
+---
+
+## 手动折腾
+
+### 1. 安装依赖包
+
+```bash
+# xray内核
+npm install nodejs-argo
+
+# singbox内核
+npm install node-sbx
+```
+
+### 2. 启动服务
+
+```bash
+# xray内核
+npx nodejs-argo
+
+# singbox内核
+npx node-sbx
+```
+
+### 3. 带变量启动
+
+```bash
+export UUID=""
+export NEZHA_SERVER=""
+export NEZHA_KEY=""
+export ARGO_DOMAIN=""
+export ARGO_AUTH=""
+export CFIP=""
+export NAME=""
+npx nodejs-argo
+# 或 npx node-sbx
+```
+
+### 4. 修改 dev.nix
 
 #### 第一处：依赖包
 
@@ -67,15 +73,13 @@ NAME=IDX \
 ```bash
 previews = {
   web = {
-    command = ["bash" "start.sh"];
+    command = ["npx" "nodejs-argo"];
     manager = "web";
   };
 };
 ```
 
----
-
-**不要 start.sh 直接启动**
+#### 第三处：环境变量
 
 ```bash
 previews = {
