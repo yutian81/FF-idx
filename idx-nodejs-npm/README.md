@@ -125,3 +125,37 @@ previews = {
   };
 };
 ```
+
+# 对于无 nodejs 环境的 VPS
+
+## 安装环境
+
+### debian|ubuntu 系统
+
+```bash
+# 依次运行
+apt-get update && apt-get install -y curl ca-certificates gnupg
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt-get install -y nodejs
+```
+
+### alpine 系统
+
+```bash
+apk update && apk add --no-cache nodejs npm
+```
+
+## 安装npm包并启动
+
+```bash
+curl -LsO "https://raw.githubusercontent.com/yutian81/FF-idx/main/idx-nodejs-npm/start.sh" \
+&& chmod +x start.sh \
+&& SUB_TYPE=nodejs-argo \
+UUID=544f7c5b-fb9d-474e-aed7-d28d4e53f85c \
+NEZHA_SERVER=sos.de5.cc:8008 \
+NEZHA_KEY=111222333 \
+ARGO_DOMAIN=argo.ccc.net \
+ARGO_AUTH=eyxxxxxxxxxxxxxxxxx \
+NAME=IDX \
+./start.sh
+```
